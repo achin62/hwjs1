@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form style="height: 200px; width: 400px; background: rgb(243, 166, 243);">
+        <h1 style="padding: 10px 10px; background: rgb(235, 106, 106); text-align: center;">tính ngày ngày trong
+            tháng</h1>
+        <span>Tháng / năm</span>
+        <input type="text" id="thang" placeholder="Tháng" size="10">
+        /
+        <input type="text" id="nam" placeholder="Năm" size="10">
+        <input type="button" onclick="tinhNgay()" value="tính ngày">
+        <div id="ketqua" style=" text-align:center;
+         width: 80%;padding: 10px 10px; background: white;">
+        </div>
+    </form>
+    <form style="margin-top: 50px ;height: 200px; width: 400px; background: rgb(137, 183, 243);">
+        <h1 style="padding: 10px 10px; background: rgb(13, 73, 238); text-align: center;">
+            tính năm âm lịch
+        </h1>
+        <table>
+            <tr>
+                <th>năm dương lịch</th>
+                <th></th>
+                <th>năm âm lịch</th>
+            </tr>
+            <tr>
+                <td><input id="duong_lich" type="text" size="10"></td>
+                <td><input type="button" value="=>" onclick="am_lich()"></td>
+                <td><p id="am_lich" style="padding: 2px; background: white; width: 200px; margin-left: 20px;"
+                    >tính năm âm lịch</p></td>
+            </tr>
+        </table>
+    </form>
+    <form style="margin-top: 50px ;height: 200px; width: 400px; background: rgb(137, 183, 243);">
+        <h1 style="padding: 10px 10px; background: rgb(235, 106, 106); text-align: center;">tính thuế</h1>
+        <input type="text" placeholder="lương hàng tháng" id="luong"> <br>
+        <input type="button" value="Tính thuế" onclick="tinh_luong()">
+        <p id="result" style="background: rgb(233, 228, 228); height: 20px;width: 100%;" >   </p>
+      
+    </form>
+</body>
+<script type="text/javascript">
+    function tinhNgay() {
+        let thang = parseInt(document.getElementById('thang').value);
+        let nam = parseInt(document.getElementById('nam').value);
+        let ngay;
+        switch (thang) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                ngay = 31;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                ngay = 30;
+                break;
+            case 2:
+                if (nam % 400 == 0 || (nam % 4 == 0 && nam % 100 != 0)) {
+                    ngay = 29;
+                } else ngay = 28;
+                break;
+        }
+        document.getElementById('ketqua').innerHTML= `thang ${thang} nam ${nam} co ${ngay} ngay `;
+    }
+    function am_lich(){
+        let duong_lich=parseInt(document.getElementById('duong_lich').value);
+        let so_du_can=(duong_lich-3)%10;
+        let so_du_chi=(duong_lich-3)%12;
+        let can;
+        let chi;
+        switch(so_du_can){
+            case 0:
+                can = 'Qúy';
+                break;
+            case 1:
+                can = 'Giáp';
+                break;
+            case 2:
+                can = 'Ất';
+                break;
+            case 3:
+                can = 'Bính';
+                break;
+            case 4:
+                can = 'Đinh';
+                break;
+            case 5:
+                can = 'Mậu';
+                break;
+            case 6:
+                can = 'Kỷ';
+                break;
+            case 7:
+                can = 'Canh';
+                break;
+            case 8:
+                can = 'Thân';
+                break;
+            case 9:
+                can = 'Nhâm';
+                break;
+            
+            default:
+                break;
+        }
+        switch(so_du_chi){
+            case 0:
+                chi = 'Hợi';
+                break;
+            case 1:
+                chi = 'Tý';
+                break;
+            case 2:
+                chi = 'Sửu';
+                break;
+            case 3:
+                chi = 'Dần';
+                break;
+            case 4:
+                chi = 'Mão';
+                break;
+            case 5:
+                chi = 'Thìn';
+                break;
+            case 6:
+                chi = 'Tỵ';
+                break;
+            case 7:
+                chi = 'Ngọ';
+                break;
+            case 8:
+                chi = 'Mùi';
+                break;
+            case 9:
+                chi = 'Thân';
+                break;
+            case 10:
+                chi = 'Dậu';
+                break;
+            case 11:
+                chi = 'Tuất';
+                break;
+            default:
+                break;
+        }
+    document.getElementById('am_lich').innerHTML=`${can} ${chi}`;
+    }
+    function tinh_luong(){
+        let luong=parseInt(document.getElementById('luong').value);
+        let thue;
+        let rong;
+        if(luong<7){
+            thue=luong*0.1;
+            rong=luong-thue;
+        } 
+        if(luong<15 && luong>=7){4
+            thue = luong * 0.2;
+            rong = luong - thue;
+        } 
+        if(luong>=15){
+            thue = luong * 0.3;
+            rong = luong- thue;
+        }
+        document.getElementById('result').innerHTML=`Lương ban đầu ${luong}:Thuế ${thue} và Lương ròng ${rong}`;
+    
+    }
+</script>
+
+</html>
